@@ -1,25 +1,82 @@
-Thanks for downloading this theme!
+# Quiz Fever
+Система за създадване, управление, на свадбени събития със свободен достъп.
 
-## Other Useful Links
+## Функционалност
+* Регистрация на потребители
+* Възможност за разглеждане на събития от други потребители
+* Възможност за изпрашане на пожелания от други потребители
+* Възможност за съзздаване на сватбени събития от регистрирани потребители
+* Интерактивен редактор за създаване и упражление на списъци с гости по маси!!
+* Интерактивен, гъвкав UX
 
-**ThemeWagon** is a great source for downloading free HTML templates built with the latest technology.
+## Технологии
+* HTML, CSS, JavaScript
+* lit-html, page
+* GitHub Pages, Back4app
 
-To download free templates, follow this link: https://themewagon.com/theme_tag/free/
+## Екрани (Страници)
+* **Welcome Screen** (landing page)
+* **Login/Regsiter** - регистрация с мейл, потребителско име, парола
+* **Wedding** 
+* **Wedding Create** 
+* **Wedding Catalog** 
+* **Weding Details** 
+* **Story** 
+* **Story Create** 
+* **Events** 
+* **Events Create** 
+* **GuestList** 
+* **GuestList Create** 
+* **Wishes** 
+* **Wishes Create** 
 
-Besides that, you can buy our premium templates for making your web development experience unforgettable.
+## План за изпълнение
+### Part 1
+* Създаване и настройване на приложение в Back4app
+* Деплойване на приложение в GitHub Pages
+* Login/Register страница
+* Wedding Create функционалност
 
-Visit the store from here: https://themewagon.com/theme-categories/premium-templates/
+### Part 2
+* Довършване на структура и стилизация
+* Welcome Screen
+* Quiz Browser
+* Quiz Details
+* Quiz Contest Mode
+* Quiz Results
+* Profile Page
 
-Alternatively, here's our top most trending and selling items:
+## Реализация
+### Структура на данните
+#### Колекции
+* Sessions (служебна)
+* Users (служебна)
+```javascript
+{
+    email: String,
+    username: String,
+    password: String
+}
+```
+* Weddings
+```javascript
+{
+    date: DateTime
+    title: String,
+    brideName: String,
+    brideStory: Number,
+    groomName: String,
+    groomStory: Number
+    ownerId:  Pointer<User>
 
-* [**Sparrow**](https://themewagon.com/themes/sparrow/) - A multipurpose template made with Bootstrap 4.1 and world's finest animation.
-* [**Posh**](https://themewagon.com/themes/posh-html5-bootstrap-4-template/) - Bootstrap 4 template with a myriad number of ready-to-deploy sections. 
-* [**Elixir**](https://themewagon.com/themes/elixir-elegant-html5-bootstrap-template-consultancy-agency-website/) - Bootstrap 4 agency template. Best for smooth animated scrolling. 
-* [**Freya**](https://themewagon.com/themes/bootstrap-4-premium-interior-design-template-freya/) - Interior design template made with Bootstrap 4. 
-* [**Reign Pro**](https://themewagon.com/themes/reign-pro-premium-corporate-agency-html5-template/) - A corporate template with a visually unique design scheme. 
-* [**Boots4**](https://themewagon.com/themes/first-ever-bootstrap-4-template/) - One of the first Bootstrap 4 templates ever made on earth. 
-* [**Hideaway**](https://themewagon.com/themes/hideaway/) - A template for resorts. Built with Bootstrap 4. 
-* [**Baikal**](https://themewagon.com/themes/bootstrap-4-startup-small-business-website-template/) - A smart Bootstrap template for start-up. 
-* [**Mega Discount**](https://themewagon.com/themes/mega-discount-bundle/) - A bundle of 26 HTML5 templates; best value for your money. 
+}
+```
+
+#### Контрол на достъпа
+* Гостите могат да се регистрират, да преглеждат каталога, детайлите на сватбите
+* Регистрираните потребители могат да създават сватбени събирия, сяисъци с гости(по маси), график на събитията. 
+* Само създателя на едина сватба може да я редактира и изтрива
+* Всеки регистриран потребител може да решава чужд тест
+
 
 
