@@ -1,0 +1,7 @@
+1. Initialize project
+2. Copy /api
+3. Create Back4app app
+4. View documentation on Users
+5. Adjust api.js to include AppID, APIKey, correct headers, register/login/logout routes and bodies
+6. Test register/logout/login
+7. Examine Database Browser, create Wedding collection

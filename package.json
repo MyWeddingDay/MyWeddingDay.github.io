@@ -1,0 +1,25 @@
+{
+  "name": "mywedingproject-spa",
+  "version": "1.0.0",
+  "description": "Система за създадване, управление, на свадбени събития със свободен достъп.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MyWeddingDay/MyWeddingDay.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MyWeddingDay/MyWeddingDay.github.io/issues"
+  },
+  "homepage": "https://github.com/MyWeddingDay/MyWeddingDay.github.io#readme",
+  "dependencies": {
+    "lit-html": "^2.3.1",
+    "lite-server": "^2.6.1",
+    "page": "^1.11.6"
+  }
+}
