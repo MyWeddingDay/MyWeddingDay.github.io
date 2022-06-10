@@ -20,7 +20,7 @@ window.api = api;
 
 const main = document.getElementById('main-content');
 document.getElementById('logoutBtn').addEventListener('click', logout);
-// setUserNav();
+setUserNav();
 
 
 // page('/', decorateContext, homePage);
@@ -46,20 +46,19 @@ document.getElementById('logoutBtn').addEventListener('click', logout);
 //     next();
 // }
 
-// function setUserNav() {
-//     const user = getUserData();
-//     if (user) {
-//         document.getElementById('profile').style.display = 'block';
-//         document.getElementById('welcome').textContent = `Welcome ${user.username}`
-//         document.getElementById('guest').style.display = 'none';
-//     } else {
-//         document.getElementById('profile').style.display = 'none';
-//         document.getElementById('guest').style.display = 'block';
-//     }
-// }
+function setUserNav() {
+    const token = sessionStorage.getItem('authToken');
+    if (token) {
+        [...document.querySelectorAll('.profile')].map(x => x.style.display = 'block inline');
+        [...document.querySelectorAll('.guest')].map(x => x.style.display = 'none');
+    } else {
+        [...document.querySelectorAll('.profile')].map(x => x.style.display = 'none');
+        [...document.querySelectorAll('.guest')].map(x => x.style.display = 'block inline');
+    }
+}
 
-// function logout(event) {
-//     apiLogout();
-//     setUserNav();
-//     page.redirect('/');
-// }
+function logout(event) {
+    apiLogout();
+    setUserNav();
+    page.redirect('/');
+}
