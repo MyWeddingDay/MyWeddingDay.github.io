@@ -1,4 +1,4 @@
-import { html } from './lib.js';
+import { html } from '../lib.js';
 import { login } from '../api/data.js';
 import { headerElement } from "./header.js";
 
