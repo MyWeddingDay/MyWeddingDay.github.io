@@ -1,4 +1,4 @@
-import { html } from '../../node_modules/lit-html/lit-html.js';
+import { html } from './lib.js';
 import { register } from '../api/data.js';
 import { headerElement } from "./header.js";
 //import { notify } from './common/notification.js';
@@ -28,14 +28,14 @@ const registerTemplate = (onSubmit) => html`
                         <div class="row form-group">
 							<div class="col-md-6">
 								<label for="password">Password</label>
-								<input name="password" type="text" id="password" class="form-control" placeholder="Your password">
+								<input name="password" type="password" id="password" class="form-control" placeholder="Your password">
 							</div>
 						</div>
 
                         <div class="row form-group">
 							<div class="col-md-6">
 								<label for="repeatPass">Repeat Password</label>
-								<input name="repeatPass" type="text" id="repeatPass" class="form-control" placeholder="Repeat Password">
+								<input name="repeatPass" type="password" id="repeatPass" class="form-control" placeholder="Repeat Password">
 							</div>
 						</div>
 						<div class="form-group">

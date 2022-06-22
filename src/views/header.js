@@ -1,4 +1,4 @@
-import {html, render} from '../../node_modules/lit-html/lit-html.js';
+import { html, render } from './lib.js';
 
 const headerTemplate = (title, description, imgUrl) => html`
 			<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner"

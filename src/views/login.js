@@ -1,4 +1,4 @@
-import {html} from '../../node_modules/lit-html/lit-html.js';
+import { html } from './lib.js';
 import { login } from '../api/data.js';
 import { headerElement } from "./header.js";
 
@@ -57,7 +57,7 @@ export async function loginPage(ctx) {
             await login(email, password);
             event.target.reset();
             ctx.setUserNav();
-            //ctx.page.redirect('/');
+            ctx.page.redirect('/');
         } catch (err) {
            return alert(err.message)
         }
