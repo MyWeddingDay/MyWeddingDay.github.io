@@ -61,7 +61,8 @@
 * Weddings
 ```javascript
 {
-    date: DateTime
+    date: DateTime,
+    place: String
     title: String,
     brideName: String,
     brideStory: Number,

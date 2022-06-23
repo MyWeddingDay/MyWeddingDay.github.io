@@ -10,7 +10,7 @@ import { loginPage } from './views/login.js';
 // import { catalogPage } from './views/catalog.js';
 // import { normalCatalogPage } from './views/normalCatalog.js';
 // import { myListingPage } from './views/myListings.js';
-// import { createPage } from './views/create.js';
+import { createPage } from './views/create.js';
 // import { editPage } from './views/edit.js';
 // import { detailsPage } from './views/details.js';
 // import { searchByYearPage } from './views/searchByYear.js';
@@ -31,7 +31,7 @@ page('/home', decorateContext, homePage);
 // page('/myListings', decorateContext, myListingPage);
 // page('/details/:id', decorateContext, detailsPage);
 // page('/edit/:id', decorateContext, editPage);
-// page('/create', decorateContext, createPage);
+page('/createWedding', decorateContext, createPage);
 // page('/searchByYear', decorateContext, searchByYearPage);
 
 
