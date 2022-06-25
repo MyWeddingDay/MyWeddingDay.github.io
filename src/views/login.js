@@ -25,7 +25,7 @@ const loginTemplate = (onSubmit) => html`
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Register" class="btn btn-primary">
+                        <input type="submit" value="Login" class="btn btn-primary">
                     </div>
 
                 </form>		
@@ -42,6 +42,8 @@ export async function loginPage(ctx) {
     headerElement(title, description);
 
     ctx.render(loginTemplate(onSubmit));
+
+    //TODO validation message
 
     async function onSubmit(event) {
         event.preventDefault();
