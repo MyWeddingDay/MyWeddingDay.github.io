@@ -39,7 +39,7 @@ const loginTemplate = (onSubmit) => html`
 export async function loginPage(ctx) {
     const title = 'Login Page';
     const description = html`Don't have an account? <a  href="/register" >Create one here</a>.`
-    headerElement(title, description);
+    await headerElement(title, description);
 
     ctx.render(loginTemplate(onSubmit));
 
@@ -61,6 +61,7 @@ export async function loginPage(ctx) {
             ctx.setUserNav();
             ctx.page.redirect('/');
         } catch (err) {
+            //TODO make correct respond
            return alert(err.message)
         }
     }

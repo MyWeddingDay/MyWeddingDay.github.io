@@ -24,7 +24,7 @@ const homeTemplate = (weddings) => html`
 
 const weddingCard = (wedding) => html`
 					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(images/gallery-1.jpg); ">
-						<a href="/details/${wedding.objectId}" class="color-2">
+						<a href="/wedding/details/${wedding.objectId}" class="color-2">
 							<div class="case-studies-summary">
 								<span>30 Guests</span>
 								<h2>${wedding.brideName} &amp; ${wedding.groomName}</h2>
@@ -33,7 +33,7 @@ const weddingCard = (wedding) => html`
 					</li>`;
 
 export async function homePage(ctx) {
-    headerElement('Home Page', 'List of all weddings');
+    await headerElement('Home Page', 'List of all weddings');
 	const weddings = await getWeddings();
     ctx.render(homeTemplate(weddings));
 }

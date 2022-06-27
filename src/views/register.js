@@ -53,7 +53,7 @@ const registerTemplate = (onSubmit) => html`
 export async function registerPage(ctx) {
     const title = 'Register Page';
     const description = html`Already have an account? <a class="invert" href="/login">Sign in here</a>.`
-    headerElement(title, description);
+    await headerElement(title, description);
 
     ctx.render(registerTemplate(onSubmit));
     async function onSubmit(event) {

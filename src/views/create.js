@@ -75,10 +75,10 @@ const createTemplate = (onSubmit) => html`
 </div>`;
 
 export async function createPage(ctx) {
-
+    //TODO only one wedding for user!!
     const title = 'Create wedding Page';
     const description = html`Create your wedding details here?`
-    headerElement(title, description);
+    await headerElement(title, description);
 
     ctx.render(createTemplate(onSubmit))
 
@@ -93,8 +93,6 @@ export async function createPage(ctx) {
         const groomName = formData.get('groomName').trim();
         const groomStory = formData.get('groomStory').trim();
         const date = formData.get('date').trim();
-
-
 
         try {
             if (!title || !place || !brideName || !brideStory || !groomName || !groomStory || !date) {
@@ -118,7 +116,5 @@ export async function createPage(ctx) {
         } catch (error) {
            return alert(error.message);
         }
-
-
     }
 }

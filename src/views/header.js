@@ -2,7 +2,7 @@ import { html, render } from '../lib.js';
 
 const headerTemplate = (title, description, imgUrl) => html`
 			<header id="fh5co-header" class="fh5co-cover fh5co-cover-sm" role="banner"
-				style="background-image:url(${imgUrl ? imgUrl : 'images/img_bg_1.jpg'});">
+				style="background-image:url(${imgUrl});">
 				<div class="overlay"></div>
 				<div class="fh5co-container">
 					<div class="row">
@@ -19,7 +19,7 @@ const headerTemplate = (title, description, imgUrl) => html`
 			</header>
 `;
 
-export async function headerElement(title, description, imgUrl) {
+export async function headerElement(title, description, imgUrl = '/images/img_bg_1.jpg') {
     const header = document.getElementById('header');
     render(headerTemplate(title, description, imgUrl), header);
 
