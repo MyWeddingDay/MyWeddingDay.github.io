@@ -12,7 +12,9 @@ import { loginPage } from './views/login.js';
 // import { myListingPage } from './views/myListings.js';
 import { createPage } from './views/create.js';
 // import { editPage } from './views/edit.js';
-// import { detailsPage } from './views/details.js';
+import { detailsPage } from './views/details.js';
+import { myWeddingPage } from './views/myWedding.js';
+
 // import { searchByYearPage } from './views/searchByYear.js';
 
 import * as api from './api/data.js';
@@ -29,7 +31,9 @@ page('/', decorateContext, homePage);
 page('/home', decorateContext, homePage);
 // page('/catalog', decorateContext, normalCatalogPage);
 // page('/myListings', decorateContext, myListingPage);
-// page('/details/:id', decorateContext, detailsPage);
+page('/wedding/details/:id', decorateContext, detailsPage);
+page('/wedding/details', decorateContext, detailsPage);
+page('/myWedding', decorateContext, myWeddingPage);
 // page('/edit/:id', decorateContext, editPage);
 page('/createWedding', decorateContext, createPage);
 // page('/searchByYear', decorateContext, searchByYearPage);
