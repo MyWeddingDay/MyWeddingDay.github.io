@@ -1,6 +1,6 @@
 import { html } from '../lib.js';
-import { headerElement } from "./header.js";
-import {getWeddings} from '../api/data.js'
+import { headerElement } from './header.js';
+import {getWeddings} from '../api/data.js';
 
 const homeTemplate = (weddings) => html`
 	<div id="fh5co-gallery">

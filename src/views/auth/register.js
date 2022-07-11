@@ -1,6 +1,6 @@
-import { html } from '../lib.js';
-import { register } from '../api/data.js';
-import { headerElement } from "./header.js";
+import { html } from '../../lib.js';
+import { register } from '../../api/data.js';
+import { headerElement } from '../header.js';
 //import { notify } from './common/notification.js';
 
 

@@ -21,6 +21,7 @@ const headerTemplate = (title, description, imgUrl) => html`
 
 export async function headerElement(title, description, imgUrl = '/images/img_bg_1.jpg') {
     const header = document.getElementById('header');
+
     render(headerTemplate(title, description, imgUrl), header);
 
 }

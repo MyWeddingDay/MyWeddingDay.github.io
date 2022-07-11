@@ -1,10 +1,10 @@
-import { html } from '../lib.js';
-import { createWedding } from '../api/data.js';
-import { headerElement } from "./header.js";
+import { html } from '../../lib.js';
+import { updateWedding , getWeddingId } from '../../api/data.js';
+import { headerElement } from "../header.js";
 
 
 
-const createTemplate = (onSubmit) => html`
+const editWeddingTemplate = (item, onSubmit) => html`
 <div class="fh5co-section">
     <div class="container">
         <div class="row">
@@ -15,35 +15,36 @@ const createTemplate = (onSubmit) => html`
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="title">Title</label>
-                            <input name="title" type="text" id="title" class="form-control" placeholder="Title">
+                            <input name="title" type="text" id="title" class="form-control" placeholder="Title" .value=${item.title}>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="place">Wedding ceremony address</label>
-                            <input name="place" type="text" id="place" class="form-control" placeholder="Wedding ceremony address">
+                            <input name="place" type="text" id="place" class="form-control" placeholder="Wedding ceremony address" .value=${item.place}>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="date">Wedding date</label>
-                            <input name="date" type="text" id="date" class="form-control" placeholder="Wedding date">
+                            <!-- TODO .value dont work -->
+                            <input name="date" type="date" id="date" class="form-control" placeholder="Wedding date" .value=${item.date}>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="brideName">Bride Name</label>
-                            <input name="brideName" type="text" id="brideName" class="form-control" placeholder="Bride Name">
+                            <input name="brideName" type="text" id="brideName" class="form-control" placeholder="Bride Name" .value=${item.brideName}>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="brideStory">Bride Story</label>
-							<textarea name="brideStory" id="brideStory" cols="30" rows="10" class="form-control" placeholder="Write your story here"></textarea>
+							<textarea name="brideStory" id="brideStory" cols="30" rows="10" class="form-control" placeholder="Write your story here" .value=${item.brideStory}></textarea>
 
                         </div>
                     </div>
@@ -51,36 +52,38 @@ const createTemplate = (onSubmit) => html`
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="groomName">Groom Name</label>
-                            <input name="groomName" type="text" id="groomName" class="form-control" placeholder="Groom Name">
+                            <input name="groomName" type="text" id="groomName" class="form-control" placeholder="Groom Name" .value=${item.groomName}>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="groomStory">Groom Story</label>
-							<textarea name="groomStory" id="groomStory" cols="30" rows="10" class="form-control" placeholder="Write your story here"></textarea>
+							<textarea name="groomStory" id="groomStory" cols="30" rows="10" class="form-control" placeholder="Write your story here" .value=${item.groomStory}></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary">
+                        <input type="submit" value="Update" class="btn btn-primary">
                     </div>
-
                 </form>		
             </div>
-
         </div>
-        
     </div>
 </div>`;
 
-export async function createPage(ctx) {
-    //TODO only one wedding for user!!
-    const title = 'Create wedding Page';
-    const description = html`Create your wedding details here?`
-    await    headerElement(title, description);
+export async function editPage(ctx) {
+	const wedding = await getWeddingId(ctx.params.id);
+	const isOwner = ctx.userId == wedding.owner.objectId;
+    if (!isOwner) {
+        ctx.page.redirect('/');
+    }
 
-    ctx.render(createTemplate(onSubmit))
+    const title = 'Update wedding Page';
+    const description = html`Update your wedding details here?`;
+    await headerElement(title, description);
+
+    ctx.render(editWeddingTemplate(wedding, onSubmit))
 
     async function onSubmit(event) {
         event.preventDefault();
@@ -103,16 +106,16 @@ export async function createPage(ctx) {
                 title: title,
                 place: place,
                 brideName: brideName,
-                brideStory: brideName,
+                brideStory: brideStory,
                 groomName: groomName,
                 groomStory: groomStory,
                 date: date,
               };
               
 
-            await createWedding(item);
+            await updateWedding(wedding.objectId, item);
             event.target.reset();
-            ctx.page.redirect('/home');
+            ctx.page.redirect(`/wedding/details/${ctx.params.id}`);
         } catch (error) {
            return alert(error.message);
         }

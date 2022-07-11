@@ -1,6 +1,6 @@
-import { html } from '../lib.js';
-import { login } from '../api/data.js';
-import { headerElement } from "./header.js";
+import { html } from '../../lib.js';
+import { login } from '../../api/data.js';
+import { headerElement } from '../header.js';
 
 const loginTemplate = (onSubmit) => html`
 <div class="fh5co-section">

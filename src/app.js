@@ -5,15 +5,12 @@ import { logout as apiLogout } from './api/data.js';
 
 
 import { homePage } from './views/home.js';
-import { registerPage } from './views/register.js';
-import { loginPage } from './views/login.js';
-// import { catalogPage } from './views/catalog.js';
-// import { normalCatalogPage } from './views/normalCatalog.js';
-// import { myListingPage } from './views/myListings.js';
-import { createPage } from './views/create.js';
-// import { editPage } from './views/edit.js';
-import { detailsPage } from './views/details.js';
-import { myWeddingPage } from './views/myWedding.js';
+import { registerPage } from './views/auth/register.js';
+import { loginPage } from './views/auth/login.js';
+import { createPage } from './views/wedding/create.js';
+import { editPage } from './views/wedding/edit.js';
+import { detailsPage } from './views/wedding/details.js';
+import { myWeddingPage } from './views/wedding/myWedding.js';
 
 // import { searchByYearPage } from './views/searchByYear.js';
 
@@ -34,7 +31,7 @@ page('/home', decorateContext, homePage);
 page('/wedding/details/:id', decorateContext, detailsPage);
 page('/wedding/details', decorateContext, detailsPage);
 page('/myWedding', decorateContext, myWeddingPage);
-// page('/edit/:id', decorateContext, editPage);
+page('/wedding/edit/:id', decorateContext, editPage);
 page('/createWedding', decorateContext, createPage);
 // page('/searchByYear', decorateContext, searchByYearPage);
 
