@@ -54,7 +54,7 @@ export async function loginPage(ctx) {
                 throw new Error('All fields are reqired');
             }
 
-            await login(email, password);
+            await login(username, password);
             event.target.reset();
             ctx.setUserNav();
             ctx.page.redirect('/');
