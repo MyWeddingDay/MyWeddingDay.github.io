@@ -11,6 +11,7 @@ import { createPage } from './views/wedding/create.js';
 import { editPage } from './views/wedding/edit.js';
 import { detailsPage } from './views/wedding/details.js';
 import { myWeddingPage } from './views/wedding/myWedding.js';
+import { eventsPage } from './views/events/events.js';
 
 // import { searchByYearPage } from './views/searchByYear.js';
 
@@ -22,18 +23,16 @@ document.getElementById('logoutBtn').addEventListener('click', logout);
 setUserNav();
 
 
-page('/register', decorateContext, registerPage);
-page('/login', decorateContext, loginPage);
 page('/', decorateContext, homePage);
 page('/home', decorateContext, homePage);
-// page('/catalog', decorateContext, normalCatalogPage);
-// page('/myListings', decorateContext, myListingPage);
+page('/register', decorateContext, registerPage);
+page('/login', decorateContext, loginPage);
 page('/wedding/details/:id', decorateContext, detailsPage);
 page('/wedding/details', decorateContext, detailsPage);
-page('/myWedding', decorateContext, myWeddingPage);
 page('/wedding/edit/:id', decorateContext, editPage);
 page('/createWedding', decorateContext, createPage);
-// page('/searchByYear', decorateContext, searchByYearPage);
+page('/myWedding', decorateContext, myWeddingPage);
+page('/events', decorateContext, eventsPage);
 
 
 page.start();

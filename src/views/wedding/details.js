@@ -1,6 +1,7 @@
-import { html } from '../../lib.js';
+import { html, until } from '../../lib.js';
 import {headerElement} from '../header.js'
 import { getWeddingId, deleteWedding, getWeddingsByUserId } from '../../api/data.js';
+import { loaderTemplate } from '../common/loader.js';
 
 const detailsTemplate = (item, onDelete, isOwner) => html`
 	<div id="fh5co-couple">
@@ -42,20 +43,25 @@ const detailsTemplate = (item, onDelete, isOwner) => html`
 	</div>`;
 
 export async function detailsPage(ctx) {
-	const weddings = await getWeddingsByUserId(ctx.userId);
-	const weddingId = ctx.params.id || weddings[0].objectId;
-	const wedding = await getWeddingId(weddingId);
-	await headerElement(html`${wedding.brideName.split(' ')[0]} &amp ${wedding.groomName.split(' ')[0]})`, 'We Are Getting Married');
-	const isOwner = ctx.userId == wedding.owner.objectId;
-	ctx.render(detailsTemplate(wedding, onDelete, isOwner));
+	ctx.render(until(populateTemplate(), loaderTemplate()));
+	
+	async function populateTemplate() {
+		const weddings = await getWeddingsByUserId(ctx.userId);
+		const weddingId = ctx.params.id || weddings[0].objectId;
+		const wedding = await getWeddingId(weddingId);
+		await headerElement(html`${wedding.brideName.split(' ')[0]} &amp ${wedding.groomName.split(' ')[0]})`, 'We Are Getting Married');
+		const isOwner = ctx.userId == wedding.owner.objectId;
+		
+		return detailsTemplate(wedding, onDelete, isOwner);
 
-	async function onDelete(event) {
-		event.preventDefault();
-
-		const confirmed = confirm('Are you sure you want to dellete this item !!!');
-		if (confirmed) {
-			await deleteWedding(ctx.params.id);
-			ctx.page.redirect('/');
+		async function onDelete(event) {
+			event.preventDefault();
+	
+			const confirmed = confirm('Are you sure you want to dellete this item !!!');
+			if (confirmed) {
+				await deleteWedding(ctx.params.id);
+				ctx.page.redirect('/');
+			}
 		}
 	}
 }

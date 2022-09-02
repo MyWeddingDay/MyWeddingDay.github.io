@@ -1,6 +1,7 @@
-import { html } from '../lib.js';
+import { html, until } from '../lib.js';
 import { headerElement } from './header.js';
 import {getWeddings} from '../api/data.js';
+import { loaderTemplate } from './common/loader.js';
 
 const homeTemplate = (weddings) => html`
 	<div id="fh5co-gallery">
@@ -34,6 +35,10 @@ const weddingCard = (wedding) => html`
 
 export async function homePage(ctx) {
     await headerElement('Home Page', 'List of all weddings');
-	const weddings = await getWeddings();
-    ctx.render(homeTemplate(weddings));
+	ctx.render(until(populateTemplate(), loaderTemplate()));
+
+	async function populateTemplate() {
+		const weddings = await getWeddings();
+		return homeTemplate(weddings);
+	}
 }

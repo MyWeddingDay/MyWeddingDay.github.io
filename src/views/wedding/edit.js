@@ -1,6 +1,7 @@
-import { html } from '../../lib.js';
+import { html, until } from '../../lib.js';
 import { updateWedding , getWeddingId } from '../../api/data.js';
 import { headerElement } from "../header.js";
+import { loaderTemplate } from '../common/loader.js';
 
 
 
@@ -73,51 +74,58 @@ const editWeddingTemplate = (item, onSubmit) => html`
 </div>`;
 
 export async function editPage(ctx) {
-	const wedding = await getWeddingId(ctx.params.id);
-	const isOwner = ctx.userId == wedding.owner.objectId;
-    if (!isOwner) {
-        ctx.page.redirect('/');
-    }
-
     const title = 'Update wedding Page';
     const description = html`Update your wedding details here?`;
     await headerElement(title, description);
 
-    ctx.render(editWeddingTemplate(wedding, onSubmit))
+    
+    ctx.render(until(populateTemplate(), loaderTemplate()));
+    
+    async function populateTemplate() {
+        const wedding = await getWeddingId(ctx.params.id);
+        const isOwner = ctx.userId == wedding.owner.objectId;
+        if (!isOwner) {
+            ctx.page.redirect('/');
+        }
+        
+        return editWeddingTemplate(wedding, onSubmit);
 
-    async function onSubmit(event) {
-        event.preventDefault();
-
-        const formData = new FormData(event.target);
-        const title = formData.get('title').trim();
-        const place = formData.get('place').trim();
-        const brideName = formData.get('brideName').trim();
-        const brideStory = formData.get('brideStory').trim();
-        const groomName = formData.get('groomName').trim();
-        const groomStory = formData.get('groomStory').trim();
-        const date = formData.get('date').trim();
-
-        try {
-            if (!title || !place || !brideName || !brideStory || !groomName || !groomStory || !date) {
-                throw new Error('All fields are reqired');              
+        async function onSubmit(event) {
+            event.preventDefault();
+    
+            const formData = new FormData(event.target);
+            const title = formData.get('title').trim();
+            const place = formData.get('place').trim();
+            const brideName = formData.get('brideName').trim();
+            const brideStory = formData.get('brideStory').trim();
+            const groomName = formData.get('groomName').trim();
+            const groomStory = formData.get('groomStory').trim();
+            const date = formData.get('date').trim();
+    
+            try {
+                if (!title || !place || !brideName || !brideStory || !groomName || !groomStory || !date) {
+                    throw new Error('All fields are reqired');              
+                }
+    
+                const item = {
+                    title: title,
+                    place: place,
+                    brideName: brideName,
+                    brideStory: brideStory,
+                    groomName: groomName,
+                    groomStory: groomStory,
+                    date: date,
+                  };
+                  
+    
+                await updateWedding(wedding.objectId, item);
+                event.target.reset();
+                ctx.page.redirect(`/wedding/details/${ctx.params.id}`);
+            } catch (error) {
+               return alert(error.message);
             }
-
-            const item = {
-                title: title,
-                place: place,
-                brideName: brideName,
-                brideStory: brideStory,
-                groomName: groomName,
-                groomStory: groomStory,
-                date: date,
-              };
-              
-
-            await updateWedding(wedding.objectId, item);
-            event.target.reset();
-            ctx.page.redirect(`/wedding/details/${ctx.params.id}`);
-        } catch (error) {
-           return alert(error.message);
         }
     }
+
+
 }

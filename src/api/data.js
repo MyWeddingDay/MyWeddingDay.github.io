@@ -52,3 +52,21 @@ export async function updateWedding(id, wedding) {
 export async function deleteWedding(id) {
     return await api.del(host + '/classes/Wedding/' + id);
 }
+
+//Events collection
+export async function getAllEventsByUserId(userId) {
+    const query = JSON.stringify({ owner: createPointer('_User', userId) });
+    const response  = await api.get(host + '/classes/Event?where=' + encodeURIComponent(query));
+    return response.results;
+}
+
+export async function createEvent(event, weddingId) {
+    const body = addOwner(event);
+    body.wedding = createPointer('Wedding', weddingId);
+    console.log(body);
+    return await api.post(host + '/classes/Event', body);
+}
+
+export async function getEventById(id) {
+    return await api.post(host + '/classes/Event/' + id + '?include=owner');
+}
