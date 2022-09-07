@@ -2,7 +2,7 @@
   "name": "mywedingproject-spa",
   "version": "1.0.0",
   "description": "Система за създадване, управление, на свадбени събития със свободен достъп.",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

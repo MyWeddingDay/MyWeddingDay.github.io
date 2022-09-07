@@ -1,5 +1,5 @@
-import page from '//unpkg.com/page/page.mjs';
-import {render } from './lib.js';
+//import page from '//unpkg.com/page/page.mjs';
+import {render, page } from './lib.js';
 
 import { logout as apiLogout } from './api/data.js';
 
