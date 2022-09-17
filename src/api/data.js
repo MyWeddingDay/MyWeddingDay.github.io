@@ -34,6 +34,12 @@ export async function getWeddingId(id) {
     return await api.get(host + '/classes/Wedding/' + id + '?include=owner');
 }
 
+export async function getWeddingsByUserId(userId) {
+    const query = JSON.stringify({ owner: createPointer('_User', userId) });
+    const response  = await api.get(host + '/classes/Wedding?where=' + encodeURIComponent(query));
+    return response.results;
+}
+
 export async function createWedding(wedding) {
     const body = addOwner(wedding);
     return await api.post(host + '/classes/Wedding', body);

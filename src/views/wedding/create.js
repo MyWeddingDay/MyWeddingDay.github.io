@@ -1,5 +1,5 @@
 import { html } from '../../lib.js';
-import { createWedding } from '../../api/data.js';
+import { createWedding, getWeddingsByUserId } from '../../api/data.js';
 import { headerElement } from '../header.js';
 
 
@@ -77,11 +77,21 @@ const createTemplate = (onSubmit) => html`
 
 export async function createPage(ctx) {
     //TODO only one wedding for user!!
-    const title = 'Create wedding Page';
-    const description = html`Create your wedding details here?`;
-    await headerElement(title, description);
+    const weddings =  await getWeddingsByUserId(ctx.userId);
 
-    ctx.render(createTemplate(onSubmit))
+    if (weddings.length == 0) {
+        const title = 'Create wedding Page';
+        const description = html`Create your wedding details here?`;
+        await headerElement(title, description);
+        ctx.render(createTemplate(onSubmit));
+    } else {
+        const weddingId =  weddings[0].objectId;
+        const title = 'Create wedding Page';
+        const description = html`You already created your wedding event!! <a  href="/wedding/details/${weddingId}" >See details here!</a>.`
+        await headerElement(title, description);
+        ctx.render('');
+    }
+
 
     async function onSubmit(event) {
         event.preventDefault();
