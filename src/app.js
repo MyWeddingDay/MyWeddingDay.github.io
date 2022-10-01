@@ -13,6 +13,8 @@ import { detailsPage } from './views/wedding/details.js';
 import { myWeddingPage } from './views/wedding/myWedding.js';
 import { eventsPage } from './views/events/events.js';
 import { createEventPage } from './views/events/create.js';
+import { storyPage } from './views/story/story.js';
+import { wishesPage } from './views/wishes/wish.js';
 
 // import { searchByYearPage } from './views/searchByYear.js';
 
@@ -35,6 +37,9 @@ page('/createWedding', decorateContext, createPage);
 page('/myWedding', decorateContext, myWeddingPage);
 page('/events', decorateContext, eventsPage);
 page('/events/create', decorateContext, createEventPage);
+page('/story',decorateContext, storyPage)
+page('/wishes',decorateContext, wishesPage)
+
 
 
 

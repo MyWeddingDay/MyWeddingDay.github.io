@@ -3,6 +3,9 @@ import {headerElement} from '../header.js'
 import { getWeddingId, deleteWedding, getWeddingsByUserId, getAllEventsByWeddingId } from '../../api/data.js';
 import { loaderTemplate } from '../common/loader.js';
 import { eventsTemplate } from '../events/events.js';
+import { storyTemplate } from '../story/story.js';
+import { wishesTemplate } from '../wishes/wish.js';
+
 
 const detailsTemplate = (item, onDelete, isOwner, events) => html`
 	<div id="fh5co-couple">
@@ -42,7 +45,9 @@ const detailsTemplate = (item, onDelete, isOwner, events) => html`
 			</div>` : ''}
 		</div>
 	</div>
-	${events.length == 0 ? html`<p> don have any</p>` : eventsTemplate(events)}`;
+	${events.length == 0 ? html`<p> don have any</p>` : eventsTemplate(events)}
+	${storyTemplate()}
+	${wishesTemplate()}`;
 
 export async function detailsPage(ctx) {
 	ctx.render(until(populateTemplate(), loaderTemplate()));
