@@ -60,6 +60,16 @@ export async function getAllEventsByUserId(userId) {
     return response.results;
 }
 
+export async function getAllEventsByWeddingId(weddingId) {
+    const query = JSON.stringify({ wedding: createPointer('Wedding', weddingId) });
+    const response  = await api.get(host + '/classes/Event?where=' + encodeURIComponent(query));
+    return response.results;
+}
+
+export async function getEventById(id) {
+    return await api.post(host + '/classes/Event/' + id + '?include=owner');
+}
+
 export async function createEvent(event, weddingId) {
     const body = addOwner(event);
     body.wedding = createPointer('Wedding', weddingId);
@@ -67,6 +77,14 @@ export async function createEvent(event, weddingId) {
     return await api.post(host + '/classes/Event', body);
 }
 
-export async function getEventById(id) {
-    return await api.post(host + '/classes/Event/' + id + '?include=owner');
+export async function updateEvent(id, event) {
+    return await api.put(host + '/classes/Event/' + id, event);
 }
+
+export async function deleteEvent(id) {
+    return await api.del(host + '/classes/Event/' + id);
+}
+
+
+
+

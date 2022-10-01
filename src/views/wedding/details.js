@@ -1,9 +1,10 @@
 import { html, until } from '../../lib.js';
 import {headerElement} from '../header.js'
-import { getWeddingId, deleteWedding, getWeddingsByUserId } from '../../api/data.js';
+import { getWeddingId, deleteWedding, getWeddingsByUserId, getAllEventsByWeddingId } from '../../api/data.js';
 import { loaderTemplate } from '../common/loader.js';
+import { eventsTemplate } from '../events/events.js';
 
-const detailsTemplate = (item, onDelete, isOwner) => html`
+const detailsTemplate = (item, onDelete, isOwner, events) => html`
 	<div id="fh5co-couple">
 		<div class="container">
 			<div class="row">
@@ -40,7 +41,8 @@ const detailsTemplate = (item, onDelete, isOwner) => html`
 				<a href="/wedding/edit/${item.objectId}" class="btn btn-default btn-sm">Edit</a>
 			</div>` : ''}
 		</div>
-	</div>`;
+	</div>
+	${events.length == 0 ? html`<p> don have any</p>` : eventsTemplate(events)}`;
 
 export async function detailsPage(ctx) {
 	ctx.render(until(populateTemplate(), loaderTemplate()));
@@ -51,8 +53,13 @@ export async function detailsPage(ctx) {
 		const wedding = await getWeddingId(weddingId);
 		await headerElement(html`${wedding.brideName.split(' ')[0]} &amp ${wedding.groomName.split(' ')[0]})`, 'We Are Getting Married');
 		const isOwner = ctx.userId == wedding.owner.objectId;
-		
-		return detailsTemplate(wedding, onDelete, isOwner);
+		let events = await getAllEventsByWeddingId(weddingId);
+		events.forEach(e => {
+			e.date = new Date(e.date);
+		});
+
+
+		return detailsTemplate(wedding, onDelete, isOwner, events);
 
 		async function onDelete(event) {
 			event.preventDefault();

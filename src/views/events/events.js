@@ -1,21 +1,9 @@
-import { html, until } from '../../lib.js';
-import { headerElement } from '../header.js'
-import { getWeddingId, deleteWedding, getWeddingsByUserId, getAllEventsByUserId } from '../../api/data.js';
+import { html, until, render } from '../../lib.js';
+import { getAllEventsByUserId } from '../../api/data.js';
 import { loaderTemplate } from '../common/loader.js';
 
-const days = {
-	// "sunday": 0, // << if sunday is first day of week
-	0: "sunday",
-	1: "monday",
-	2: "tuesday",
-	3: "wednesday",
-	4: "thursday",
-	5: "friday",
-	6: "saturday",
-  }
-
-const eventsTemplate = (events) => html`
-	<div id="fh5co-event" class="fh5co-bg" style="background-image:url(images/img_bg_3.jpg);  height: auto;">
+export const eventsTemplate = (events) => html`
+	<div id="fh5co-event" class="fh5co-bg" style="background-image:url(/images/img_bg_3.jpg);  height: auto;">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -29,8 +17,8 @@ const eventsTemplate = (events) => html`
 					<div class="display-tc">
 						<div class="col-md-10 col-md-offset-1">
 						${events.length == 0 
-						? html`<p>Don't have any wedding ceremony yet!!!</p>`
-						: events.map(eventCardTemplate)	}
+						? html`<p>Don't have any events yet!!!<a  href="/events/create" >Create one here</a>!</p>`
+						: events.map(x => eventCardTemplate(x))	}
 						</div>
 					</div>
 				</div>
@@ -41,7 +29,8 @@ const eventsTemplate = (events) => html`
 
 const eventCardTemplate = (event) => html`
 	<div class="col-md-6 col-sm-6 text-center">
-		<div class="event-wrap animate-box">
+		<a href="#">
+			<div class="event-wrap animate-box">
 			<h3>${event.title}</h3>
 			<div class="event-col">
 				<i class="icon-clock"></i>
@@ -54,12 +43,14 @@ const eventCardTemplate = (event) => html`
 			</div>
 			<p>${event.description}
 			</p>
-		</div>
-	</div>`;
+			</div>
+		</a>
+	</div>
+`;
 
 export async function eventsPage(ctx) {
 	const header = document.getElementById('header');
-	header.innerHTML = '';
+	render('', header);
 	update();
 	
 	async function update() {
@@ -70,13 +61,15 @@ export async function eventsPage(ctx) {
 		const userId = ctx.userId;
 		if (userId) {
 			let events = await getAllEventsByUserId(userId);
+			//TODO sort by start time
 			events.forEach(e => {
 				e.date = new Date(e.date);
 			});
-
-			return eventsTemplate(events);
+			const isOwner = true
+			return eventsTemplate(events, isOwner);
 		} else {
 			ctx.page.redirect('/login');
 		}
+
 	}
 }

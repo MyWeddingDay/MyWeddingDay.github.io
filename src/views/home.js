@@ -8,9 +8,9 @@ const homeTemplate = (weddings) => html`
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
-					<span>Our Memories</span>
+					<span>Our Wedding ceremonies</span>
 					<h2>Wedding Gallery</h2>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+					<p></p>
 				</div>
 			</div>
 			<div class="row row-bottom-padded-md">

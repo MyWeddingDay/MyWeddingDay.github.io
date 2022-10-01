@@ -12,6 +12,7 @@ import { editPage } from './views/wedding/edit.js';
 import { detailsPage } from './views/wedding/details.js';
 import { myWeddingPage } from './views/wedding/myWedding.js';
 import { eventsPage } from './views/events/events.js';
+import { createEventPage } from './views/events/create.js';
 
 // import { searchByYearPage } from './views/searchByYear.js';
 
@@ -33,6 +34,8 @@ page('/wedding/edit/:id', decorateContext, editPage);
 page('/createWedding', decorateContext, createPage);
 page('/myWedding', decorateContext, myWeddingPage);
 page('/events', decorateContext, eventsPage);
+page('/events/create', decorateContext, createEventPage);
+
 
 
 page.start();
