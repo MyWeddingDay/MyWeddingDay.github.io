@@ -36,7 +36,7 @@ export async function getWeddingId(id) {
 
 export async function getWeddingsByUserId(userId) {
     const query = JSON.stringify({ owner: createPointer('_User', userId) });
-    const response  = await api.get(host + '/classes/Wedding?where=' + encodeURIComponent(query));
+    const response  = await api.get(host + '/classes/Wedding?where=' + encodeURIComponent(query) + '&include=owner');
     return response.results;
 }
 
@@ -67,7 +67,7 @@ export async function getAllEventsByWeddingId(weddingId) {
 }
 
 export async function getEventById(id) {
-    return await api.post(host + '/classes/Event/' + id + '?include=owner');
+    return await api.get(host + '/classes/Event/' + id + '?include=owner&include=wedding');
 }
 
 export async function createEvent(event, weddingId) {

@@ -13,11 +13,13 @@ import { detailsPage } from './views/wedding/details.js';
 import { myWeddingPage } from './views/wedding/myWedding.js';
 import { eventsPage } from './views/events/events.js';
 import { createEventPage } from './views/events/create.js';
+import { editEventPage } from './views/events/editEvent.js';
+
 import { storyPage } from './views/story/story.js';
-import { wishesPage } from './views/wishes/wish.js';
 
 // import { searchByYearPage } from './views/searchByYear.js';
 
+import { wishesPage } from './views/wishes/wish.js';
 import * as api from './api/data.js';
 window.api = api;
 
@@ -36,6 +38,7 @@ page('/wedding/edit/:id', decorateContext, editPage);
 page('/createWedding', decorateContext, createPage);
 page('/myWedding', decorateContext, myWeddingPage);
 page('/events', decorateContext, eventsPage);
+page('/events/edit/:id', decorateContext, editEventPage);
 page('/events/create', decorateContext, createEventPage);
 page('/story',decorateContext, storyPage)
 page('/wishes',decorateContext, wishesPage)

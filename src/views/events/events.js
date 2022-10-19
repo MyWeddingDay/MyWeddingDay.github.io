@@ -17,7 +17,8 @@ export const eventsTemplate = (events) => html`
 					<div class="display-tc">
 						<div class="col-md-10 col-md-offset-1">
 						${events.length == 0 
-						? html`<p>Don't have any events yet!!!<a  href="/events/create" >Create one here</a>!</p>`
+						? html`
+						<h1 class="fh5co-heading">Don't have any events yet!!!<a  href="/events/create" >Create one here</a>!</h1>`
 						: events.map(x => eventCardTemplate(x))	}
 						</div>
 					</div>
@@ -29,7 +30,7 @@ export const eventsTemplate = (events) => html`
 
 const eventCardTemplate = (event) => html`
 	<div class="col-md-6 col-sm-6 text-center">
-		<a href="#">
+		<a href="/events/edit/${event.objectId}">
 			<div class="event-wrap animate-box">
 			<h3>${event.title}</h3>
 			<div class="event-col">
@@ -65,11 +66,11 @@ export async function eventsPage(ctx) {
 			events.forEach(e => {
 				e.date = new Date(e.date);
 			});
+
 			const isOwner = true
 			return eventsTemplate(events, isOwner);
 		} else {
 			ctx.page.redirect('/login');
 		}
-
 	}
 }

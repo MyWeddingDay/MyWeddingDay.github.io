@@ -9,7 +9,7 @@ const createEventTemplate = (onSubmit) => html`
     <div class="container">
         <div class="row">
             <div class="col-md-12 animate-box">
-                <h3>Create wedding Page</h3>
+                <h3>Create event Page</h3>
                 <form @submit=${onSubmit}>
 
                     <div class="row form-group">
